@@ -13,11 +13,12 @@
 #include "MyISR.h"
 
 char Char_received=0;
+uint8 Always_ON=0;
 
 CY_ISR(Custom_ISR_Timer)
 {
     Timer_ReadStatusRegister(); //bring interrupt line low
-    if(Char_flag==1)
+    if(Char_flag==1 && Always_ON == 0)
     {
     Data_flag=1;
     }
@@ -31,17 +32,21 @@ CY_ISR(Custom_ISR_UART)
         case 'B':
         case 'b':
             Char_flag = 1;
-            Confirm_LED_Write(1);
+            Confirm_LED_Write(ON);
             Timer_Start();
+            Always_ON = 0;
             break;
         case 'O':
         case 'o':
-            PWM_WriteCompare(0);
+            PWM_WriteCompare(ON);
+            Always_ON = 1;
             break;
         case 'S':
         case 's':
             Char_flag = 0;
-            Confirm_LED_Write(0);
+            Always_ON = 0;
+            Confirm_LED_Write(OFF);
+            PWM_WriteCompare(ON);
             Timer_Stop();
             break;
         default:

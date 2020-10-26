@@ -18,6 +18,8 @@
     #include "stdio.h"
     
     #define BUFFER_SIZE 16
+    #define ON 255
+    #define OFF 0
     
     // interrupt statement
     CY_ISR_PROTO (Custom_ISR_Timer);
