@@ -24,5 +24,10 @@ void Error(void);
 
 int32 Bound_sample (int32 value);
 
+void PhotoR_light_response(void);
+
+void PhotoR_dark_response(void);
+
+void Potenz_response(void);
 
 /* [] END OF FILE */
