@@ -13,13 +13,16 @@
 
 #define Potenz 0
 #define PhotoR 1
-#define Threshold 500 //reasonable threshold for dark mode
 
 int main(void)
 {
-    Data_flag = 0;
-    int32 value_digit = 0;
-    int32 value_mv = 0;
+    
+    Start_sampling = 0;
+    Dark_mode = 0;
+    
+    DataBuffer [0] = 0xA0;
+    DataBuffer [BUFFER_SIZE-1] = 0xC0;
+    PacketReadyFlag = 0;
     
     CyGlobalIntEnable; 
     isr_Timer_StartEx(Custom_ISR_Timer);
@@ -32,26 +35,21 @@ int main(void)
     
     while(1)
     {
-        if (Data_flag==1)
+        if (Dark_mode == 1)
         {
-            value_digit = ADC_Read32();
-            value_mv = ADC_CountsTo_mVolts(value_digit);
-            if (value_mv <= Threshold)
-            {
-                PWM_WriteCompare(ON);
-                sprintf(DataBuffer, "Sample: %ld mv \r\n", value_mv);
-                UART_PutString(DataBuffer);
-            }
-            else
-            {
-                PWM_WriteCompare(OFF);
-                sprintf(DataBuffer, "Sample: %ld mv \r\n", value_mv);
-                UART_PutString(DataBuffer);
-            }
-            Data_flag = 0;
+            AMux_FastSelect(Potenz);
+        }
+        if (Dark_mode == 0)
+        {
+            AMux_FastSelect(PhotoR);
+        }
+        if (PacketReadyFlag == 1)
+        {
+            UART_PutArray(DataBuffer, BUFFER_SIZE);
+            PacketReadyFlag = 0;
         }
         
-    }
-}
+    } //end while(1)
+} //end main
 
 /* [] END OF FILE */
