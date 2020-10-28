@@ -32,7 +32,7 @@ void Flags_settings()
     Dark_mode = FALSE;
     PacketReadyFlag = FALSE;
     Always_on = FALSE;
-    flag_arrived = FALSE;
+    Char_arrived = FALSE;
     //packet header and tail setting
     DataBuffer [0] = 0xA0;
     DataBuffer [BUFFER_SIZE-1] = 0xC0;
@@ -40,6 +40,7 @@ void Flags_settings()
     count = 0;
     mean_value = 0;
     Char_received = 0;
+    UART_PutString("ERROR! Please insert a valid value!\r\n");
     
 }
 
@@ -59,7 +60,7 @@ void Start_Peripherals(void)
 
 void Reset_UART(void) //required reset of UART 
 {
-    flag_arrived = FALSE;
+    Char_arrived = FALSE;
     UART_ClearRxBuffer();
 }
 
@@ -163,7 +164,7 @@ void Potenz_response(void)
 void Send_packet(void)
 {
     UART_PutArray(DataBuffer, BUFFER_SIZE);
-    PacketReadyFlag = 0;
+    PacketReadyFlag = FALSE;
 }
 
 /* [] END OF FILE */
