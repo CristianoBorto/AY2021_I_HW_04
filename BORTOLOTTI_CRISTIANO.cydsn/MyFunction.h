@@ -10,24 +10,26 @@
 
 #include "project.h"
 
-void Flag_settings(void);
+void Flags_settings(void);
 
-void Start_interrupt(void);
+void Start_interrupts(void);
 
 void Start_Peripherals(void);
 
-void Starting(void);
+void Reset_UART(void);
+
+void Starting(uint8 value);
 
 void Stopping(uint8 value);
 
-void Error(void);
-
 int32 Bound_sample (int32 value);
-
-void PhotoR_light_response(void);
 
 void PhotoR_dark_response(void);
 
+void PhotoR_light_response(void);
+
 void Potenz_response(void);
+
+void Send_packet(void);
 
 /* [] END OF FILE */
