@@ -1,0 +1,7 @@
+; RX8 packet structure
+; Header = {0xA0}
+; Data = {2 bytes var1 uint16 (PhotoR) + 2 bytes var2 uint16 (Potenz)}
+; Tail = {0xC0};
+;
+
+rx8 [h=A0] @1var1 @0var1 @1var2 @0var2 [t=C0]

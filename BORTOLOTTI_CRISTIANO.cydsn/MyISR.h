@@ -21,7 +21,7 @@
     // identification of the 2 possible working mode
     #define LIGHT_SENSIBLE 0
     #define ALWAYS_ON 1
-    // identification of the 2 possible working mode
+    // identification of stop and default mode
     #define STOP 0
     #define ERROR 1
 

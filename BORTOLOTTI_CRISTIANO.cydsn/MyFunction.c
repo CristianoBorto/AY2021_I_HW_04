@@ -40,8 +40,6 @@ void Flags_settings()
     count = 0;
     mean_value = 0;
     Char_received = 0;
-    UART_PutString("ERROR! Please insert a valid value!\r\n");
-    
 }
 
 void Start_interrupts(void)

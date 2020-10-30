@@ -22,7 +22,7 @@ int main(void)
     
     while(1)
     {
-        if (Char_arrived == TRUE)
+        if (Char_arrived == TRUE) //different responses depending on the received character
         {
             Char_received = UART_GetChar();
             switch(Char_received)
@@ -45,8 +45,8 @@ int main(void)
             }
         }
            
-        if (count == SAMPLE_NUMBER)
-        {
+        if (count == SAMPLE_NUMBER) //processing of the samples in 3 modalities: PhotoR under or over threshold 
+        {                           // and potenz responses
             mean_value /= count;
             switch(Dark_mode)
             {
@@ -67,7 +67,7 @@ int main(void)
             
         }
 
-        if (PacketReadyFlag == TRUE)
+        if (PacketReadyFlag == TRUE) //sending packet
             {
                 Send_packet();
             } 
